@@ -1,0 +1,38 @@
+[
+  {
+    "model": "libarayapp.author",
+    "pk": 1,
+    "fields": {
+      "name": "J.K. Rowling",
+      "biography": "British author, best known for the Harry Potter series.",
+      "create_at": "2025-08-25T10:00:00Z",
+      "updated_at": "2025-08-25T10:00:00Z"
+    }
+  },
+  {
+    "model": "libarayapp.book",
+    "pk": 1,
+    "fields": {
+      "title": "Harry Potter and the Philosopher's Stone",
+      "author": 1,
+      "isbn": "9780747532699",
+      "category": "Fantasy",
+      "availability_status": "AVAILABLE",
+      "Book_pages": "328.00",
+      "price": "450.50",
+      "create_at": "2025-08-25T10:05:00Z",
+      "updated_at": "2025-08-25T10:05:00Z"
+    }
+  },
+  {
+    "model": "libarayapp.member",
+    "pk": 1,
+    "fields": {
+      "name": "John Doe",
+      "email": "john@example.com",
+      "membership_date": "2025-08-25",
+      "create_at": "2025-08-25T10:10:00Z",
+      "updated_at": "2025-08-25T10:10:00Z"
+    }
+  }
+]
