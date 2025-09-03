@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from libarayapp.models import Author,Book,Member,BorrowRecord
+from libarayapp.models import Author,Book,Member,BorrowRecord,BookImage
 from decimal import Decimal
 class AuthorSerializer(serializers.ModelSerializer):
     class Meta:
@@ -7,18 +7,25 @@ class AuthorSerializer(serializers.ModelSerializer):
 
         fields=['id','name','biography','create_at','updated_at']
 
+class BookImageSerializer(serializers.ModelSerializer):
+    image=serializers.ImageField(use_url=True)
+    class Meta:
+        model = BookImage
+        fields = ['id','book', 'image']
+
 class BookSerializer(serializers.ModelSerializer):
     author=AuthorSerializer(read_only=True)
     author_id=serializers.PrimaryKeyRelatedField(queryset=Author.objects.all(),source='author',write_only=True)  #Write-only field দিয়ে foreign key assign করা
 
     price_with_tex=serializers.SerializerMethodField(method_name='calculate_tex')
 
+    images=BookImageSerializer(many=True,read_only=True)
     class Meta:
         model=Book
         fields=[
             'id', 'title', 'author', 'author_id', 'isbn', 'category',
             'availability_status', 'Book_pages', 'price', 'price_with_tex',
-            'create_at', 'updated_at'
+            'create_at', 'updated_at','images'
         ]
 
     def calculate_tex(self,book):
@@ -30,6 +37,7 @@ class BookSerializer(serializers.ModelSerializer):
         if value<=0:
             raise serializers.ValidationError('pages must be greater then 0')
         return value
+
 
 
 class MemberSerializer(serializers.ModelSerializer):

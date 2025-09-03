@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils import timezone
+from libarayapp.validators import validate_file_size
 # Create your models here.
 class TimeStampedModel(models.Model):
     create_at=models.DateTimeField(auto_now_add=True,null=True,blank=True)  # object প্রথমবার তৈরি হলে তারিখ/সময় সেট হবে
@@ -34,6 +35,10 @@ class Book(TimeStampedModel):
     def __str__(self):
         return f'{self.title}({self.isbn})'
     
+class BookImage(TimeStampedModel):
+    book=models.ForeignKey(Book,on_delete=models.CASCADE,related_name='images')
+    image = models.ImageField(
+        upload_to="products/images/", validators=[validate_file_size])
 
 class Member(TimeStampedModel):
     name=models.CharField()
