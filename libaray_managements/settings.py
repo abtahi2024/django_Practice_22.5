@@ -26,9 +26,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-%nux8n=+t@c02d(-bh7$awe6)63tttuhsr_s^67pl2=mo1i)9%'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["vercel.app",'127.0.0.1']
 
 AUTH_USER_MODEL='users.Users'
 # Application definition
@@ -92,7 +92,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'libaray_managements.wsgi.application'
+WSGI_APPLICATION = 'libaray_managements.wsgi.app'
 
 
 # Database
